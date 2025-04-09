@@ -1,0 +1,92 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+dist/
+build/
+
+# Logs
+logs
+*.log
+*.pid
+*.seed
+*.pid.lock
+
+# React
+/build
+/.cache
+/.pnp
+.pnp.js
+
+# Coverage
+coverage/
+
+# IDEs and editors
+.vscode/
+.idea/
+*.sw?
+*.sublime-workspace
+*.sublime-project
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Testing
+jest-cache/
+jest-config.json
+__snapshots__/
+coverage/
+
+# Misc
+*.tgz
+*.gz
+*.zip
+*.tar
+*.log
+
+# Compiled typescript
+*.tsbuildinfo
+
+# Optional npm cache directory
+.npm
+
+# Lint cache
+.eslintcache
+
+# Firebase / other deployments
+.firebaserc
+.firebase/
+functions/lib/
+
+# Local dev
+.local/
+tmp/
+temp/
+
+# Next.js (if using, just in case)
+.next/
+out/
+
+# Binaries
+*.exe
+*.dll
+*.so
+*.dylib
+*.bin
+
+# Mac System files
+.Spotlight-V100
+.Trashes
+
+# Yarn Integrity file
+.yarn-integrity
+
+# TypeScript
+*.tsbuildinfo
