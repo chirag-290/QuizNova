@@ -9,6 +9,7 @@ const nodemailer = require('nodemailer');
  * @param {String} options.html - Email HTML content (optional)
  */
 exports.sendEmail = async (options) => {
+  console.log('Sending email with options:', options.email);  
    
   const transporter = nodemailer.createTransport({
     service: process.env.EMAIL_SERVICE,
@@ -20,11 +21,27 @@ exports.sendEmail = async (options) => {
 
  
   const mailOptions = {
-    from: `${process.env.FROM_NAME} <${process.env.FROM_EMAIL}>`,
+    from: `'Quicknova' <${process.env.EMAIL_FROM}>`,
     to: options.email,
-    subject: options.subject,
-    text: options.message,
-    html: options.html
+    subject: `Congratulations ${options.name}! You passed the ${options.title} exam - Quicknova`,
+    html: `
+      <h2>🎉 Congratulations, ${options.name}!</h2>
+      <p>We're thrilled to inform you that you have <strong>successfully passed</strong> your exam:</p>
+      <ul>
+        <li><strong>Exam Title:</strong> ${options.title}</li>
+        <li><strong>Score:</strong> ${options.score}%</li>
+        <li><strong>Status:</strong> ${options.passed ? "Passed" : "Failed"}</li>
+      </ul>
+
+      ${options.certificateUrl ? `
+      <p>You can download your certificate from the following link:</p>
+      <p><a href="${options.certificateUrl}" target="_blank">🎓 Download Certificate</a></p>
+      ` : ""}
+
+      <p>Keep up the great work and continue learning!</p>
+      <p>Best wishes,</p>
+      <p><strong>Quicknova Team</strong></p>
+    `,
   };
 
   // Send email

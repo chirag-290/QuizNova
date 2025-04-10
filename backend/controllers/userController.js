@@ -77,12 +77,11 @@ exports.deleteUser = asyncHandler(async (req, res) => {
   });
 });
 
- 
 exports.getUserExams = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user.id)
     .populate({
       path: 'examHistory.exam',
-      select: 'title description totalMarks passingScore'
+      select: 'title description totalMarks passingScore,timeTaken'
     });
 
   res.status(200).json({

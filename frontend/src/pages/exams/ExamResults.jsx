@@ -30,6 +30,7 @@ const ExamResults = () => {
         if (historyRes.data.success) {
           // Find this exam's result
           const examResult = historyRes.data.data.find(item => item.exam._id === id);
+          console.log('Exam Result:', examResult);
           if (examResult) {
             setResults(examResult);
           } else {
@@ -132,9 +133,11 @@ const ExamResults = () => {
                   <p className="text-sm text-gray-600">Your certificate is ready to download</p>
                 </div>
               </div>
+              
               <a 
-                href={results.certificateUrl} 
+                href={`http://localhost:5000${results.certificateUrl}`} 
                 target="_blank" 
+                download 
                 rel="noopener noreferrer"
                 className="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700"
               >

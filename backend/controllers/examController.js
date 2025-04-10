@@ -2,8 +2,8 @@ const Exam = require('../models/Exam');
 const Question = require('../models/Question');
 const User = require('../models/User');
 const asyncHandler = require('express-async-handler');
-const generateCertificate = require('../utils/generateCertificate');
-const { sendExamResult } = require('../utils/emailService');
+const {generateCertificate} = require('../utils/generateCertificate');
+const { sendEmail } = require('../utils/emailService');
 
  
 const createExam = asyncHandler(async (req, res) => {
@@ -180,6 +180,7 @@ const deleteExam = asyncHandler(async (req, res) => {
   });
 });
 const submitExam = asyncHandler(async (req, res) => {
+  // console.log(req.body);
   const { answers, timeTaken } = req.body;
   
   if (!answers) {
@@ -188,19 +189,22 @@ const submitExam = asyncHandler(async (req, res) => {
   }
 
   const exam = await Exam.findById(req.params.id).populate('questions');
+  // console.log(exam);
 
   if (!exam) {
     res.status(404);
     throw new Error('Exam not found');
   }
-  const alreadySubmitted = exam.submissions.some(
-    submission => submission.student.toString() === req.user._id.toString()
-  );
+  // const alreadySubmitted = exam.submissions?.some(
+  //   submission => submission.student.toString() === req.user._id.toString()
+  // );
 
-  if (alreadySubmitted) {
-    res.status(400);
-    throw new Error('You have already submitted this exam');
-  }
+  // console.log("after already submitted")
+
+  // if (alreadySubmitted) {
+  //   res.status(400);
+  //   throw new Error('You have already submitted this exam');
+  // }
 
   const maxAllowedTime = exam.duration * 60 + 30;
   if (timeTaken > maxAllowedTime) {
@@ -269,26 +273,53 @@ const submitExam = asyncHandler(async (req, res) => {
     status: needsManualEvaluation ? 'pending' : (passed ? 'passed' : 'failed'),
     needsManualEvaluation
   };
+  // console.log("submission", submission)
+  // console.log("exam",exam);
+  // console.log("exam.submissions",exam.submissions)
+
 
   exam.submissions.push(submission);
   await exam.save();
 
+  
+ 
+
   let certificateUrl = null;
   if (passed) {
-    certificateUrl = await generateCertificate(req.user._id, exam._id);
+    console.log("in passed",req.user, exam);  
+    certificateUrl = await generateCertificate(req.user,exam,score);
     try {
-      await sendExamResult(
-        req.user.email,
-        req.user.name,
-        exam.title,
-        percentageScore.toFixed(2),
-        passed,
-        certificateUrl
+      await sendEmail(
+        {
+          email: req.user.email,
+          name: req.user.name,
+          title: exam.title,
+          score: percentageScore.toFixed(2),
+          passed,
+          certificateUrl
+        }
       );
     } catch (error) {
+    
       console.error('Email notification failed:', error);
     }
   }
+
+  const user = await User.findById(req.user._id);
+  user.examHistory.push({
+    exam: exam._id,
+    score,
+    passed,
+    submittedAt: new Date(),
+    timeTaken:timeTaken,
+    certificateGenerated: passed ? true : false,
+    certificateUrl
+  });
+  await user.save();
+
+
+  
+  console.log("certificateUrl",certificateUrl);
 
   res.status(200).json({
     success: true,
@@ -298,10 +329,16 @@ const submitExam = asyncHandler(async (req, res) => {
       percentageScore,
       passed,
       needsManualEvaluation,
-      certificateUrl
+      certificateUrl,
     }
   });
 });
+
+
+
+
+
+
 const getPendingEvaluations = asyncHandler(async (req, res) => {
   const exams = await Exam.find({
     'submissions.needsManualEvaluation': true,
@@ -397,8 +434,10 @@ const evaluateSubjective = asyncHandler(async (req, res) => {
   await exam.save();
 
    let certificateUrl = null;
+   console.log("passed",passed);
   if (passed) {
     const student = await User.findById(submission.student);
+    console.log("in certificate function",student);
     certificateUrl = await generateCertificate(submission.student, exam._id);
     
      try {
@@ -414,6 +453,7 @@ const evaluateSubjective = asyncHandler(async (req, res) => {
       console.error('Email notification failed:', error);
     }
   }
+  console.log("certificateUrl",certificateUrl)
 
   res.status(200).json({
     success: true,

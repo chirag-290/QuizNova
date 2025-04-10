@@ -12,7 +12,8 @@ const path = require('path');
  * @param {Date} options.date - Certificate issue date
  * @returns {String} - Path to the generated certificate
  */
-exports.generateCertificate = async (options) => {
+exports.generateCertificate = async (options,options1,score) => {
+   console.log('Generating certificate with options:', options,options1);
   return new Promise((resolve, reject) => {
     try {
       
@@ -22,7 +23,7 @@ exports.generateCertificate = async (options) => {
       }
 
        
-      const filename = `certificate_${options.userName.replace(/\s+/g, '_')}_${Date.now()}.pdf`;
+      const filename = `certificate_${options.name.replace(/\s+/g, '_')}_${Date.now()}.pdf`;
       const filePath = path.join(dir, filename);
 
        
@@ -72,11 +73,12 @@ exports.generateCertificate = async (options) => {
   
       doc.font('Helvetica')
          .fontSize(16)
-         .text(`with a score of ${options.score} out of ${options.totalMarks}`, { align: 'center' })
+         .text(`with a score of ${score} out of ${options1.totalMarks}`, { align: 'center' })
          .moveDown(1);
 
+         const date=new Date();
       
-      const formattedDate = options.date.toLocaleDateString('en-US', {
+      const formattedDate = date.toLocaleDateString('en-US', {
         day: 'numeric',
         month: 'long',
         year: 'numeric'

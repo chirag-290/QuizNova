@@ -148,12 +148,16 @@ const TakeExam = () => {
       questionId,
       answer: answers[questionId]
     }));
+    console.log(formattedAnswers);
     
+  
     try {
       const res = await examAPI.submitExam(id, {
         answers: formattedAnswers,
         timeTaken
       });
+
+      console.log("hello in",res.data);
       
       if (res.data.success) {
         toast.success(timeUp ? 'Time\'s up! Exam submitted.' : 'Exam submitted successfully!');

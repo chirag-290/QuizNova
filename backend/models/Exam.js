@@ -48,6 +48,41 @@ const ExamSchema = new mongoose.Schema({
     ref: 'User',
     required: true
   },
+  submissions: [{
+    student: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true
+    },
+    answers: [{
+      questionId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Question'
+      },
+      correct: Boolean,
+      answer: String,
+      points: Number,
+      maxPoints: Number,
+      needsManualEvaluation: Boolean
+    }],
+    score: Number,
+    totalPoints: Number,
+    percentageScore: Number,
+    timeTaken: Number,
+    submittedAt: {
+      type: Date,
+      default: Date.now
+    },
+    status: {
+      type: String,
+      enum: ['pending', 'passed', 'failed'],
+      default: 'pending'
+    },
+    needsManualEvaluation: {
+      type: Boolean,
+      default: false
+    }
+  }],
   participants: [{
     user: {
       type: mongoose.Schema.Types.ObjectId,

@@ -5,11 +5,13 @@ const connectDB = require('./config/db');
 const { errorHandler } = require('./middleware/errorMiddleware');
 const http = require('http');
 const { Server } = require('socket.io');
+const path = require('path');
 
 
 const authRoutes = require('./routes/authRoutes');
 const examRoutes = require('./routes/examRoutes');
  const userRoutes = require('./routes/userRoutes');
+ const questionRoutes = require('./routes/questionRoutes');
 
 
 dotenv.config();
@@ -25,8 +27,11 @@ app.use(express.json());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/exams', examRoutes);
+app.use('/api/questions', questionRoutes);
+
  
 app.use('/api/users', userRoutes);
+app.use('/certificates', express.static(path.join(__dirname, './certificates')));
 
 
 app.use(errorHandler);

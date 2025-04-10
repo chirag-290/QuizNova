@@ -35,7 +35,9 @@ const UserSchema = new mongoose.Schema({
     score: Number,
     passed: Boolean,
     submittedAt: Date,
-    certificateGenerated: Boolean
+    certificateGenerated: Boolean,
+    timeTaken: Number,
+    certificateUrl: String
   }],
   createdAt: {
     type: Date,
