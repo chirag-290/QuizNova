@@ -12,7 +12,7 @@ const Footer = () => {
           <div>
             <div className="flex items-center space-x-2 mb-4">
               <BookOpen className="h-6 w-6" />
-              <h3 className="text-xl font-bold">ExamMaster</h3>
+              <h3 className="text-xl font-bold">QuizNova</h3>
             </div>
             <p className="text-gray-300 mb-4">
               Empowering education through innovative online examination solutions.
@@ -64,7 +64,7 @@ const Footer = () => {
               <li className="flex items-center space-x-2">
                 <Mail className="h-5 w-5 text-gray-400" />
                 <a href="mailto:info@exammaster.com" className="text-gray-300 hover:text-white">
-                  info@exammaster.com
+                  info@QuizNova.com
                 </a>
               </li>
               <li className="flex items-center space-x-2">
@@ -84,7 +84,7 @@ const Footer = () => {
         </div>
         
         <div className="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
-          <p>&copy; {currentYear} ExamMaster. All rights reserved.</p>
+          <p>&copy; {currentYear} QuizNova. All rights reserved.</p>
         </div>
       </div>
     </footer>

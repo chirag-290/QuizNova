@@ -81,6 +81,10 @@ const ExamSchema = new mongoose.Schema({
     needsManualEvaluation: {
       type: Boolean,
       default: false
+    },
+    tabSwitches: {
+      type: Number,
+      default: 0
     }
   }],
   participants: [{
@@ -105,10 +109,7 @@ const ExamSchema = new mongoose.Schema({
       isCorrect: Boolean,
       marksAwarded: Number
     }],
-    tabSwitches: {
-      type: Number,
-      default: 0
-    }
+    
   }],
   createdAt: {
     type: Date,

@@ -7,6 +7,7 @@ import { examAPI, userAPI } from '../../services/api';
 import Card from '../../components/ui/Card';
 import Button from '../../components/ui/Button';
 import Spinner from '../../components/ui/Spinner';
+import Leaderboard from './Leaderboard';
 
 const ExamResults = () => {
   const { id } = useParams();
@@ -14,6 +15,7 @@ const ExamResults = () => {
   const [results, setResults] = useState(null);
   const [exam, setExam] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [showLeaderboard, setShowLeaderboard] = useState(false);
 
   useEffect(() => {
     const fetchResults = async () => {
@@ -21,6 +23,7 @@ const ExamResults = () => {
       try {
         // Get exam details
         const examRes = await examAPI.getExam(id);
+        console.log('Exam Details:', examRes.data.data);
         if (examRes.data.success) {
           setExam(examRes.data.data);
         }
@@ -52,6 +55,7 @@ const ExamResults = () => {
     return <Spinner size="large" />;
   }
 
+
   if (!results || !exam) {
     return (
       <div className="text-center py-12">
@@ -79,6 +83,7 @@ const ExamResults = () => {
       </div>
       
       {/* Results Summary */}
+      {!showLeaderboard && (
       <div className="bg-white rounded-lg shadow-md overflow-hidden">
         <div className={`px-6 py-4 text-white ${results.passed ? 'bg-green-600' : 'bg-red-600'}`}>
           <div className="flex items-center">
@@ -144,10 +149,25 @@ const ExamResults = () => {
                 <Download className="h-5 w-5 mr-2" />
                 Download
               </a>
+              
             </div>
+            
           )}
+          
+          <div className='flex mt-4 justify-center'>
+          <Button  onClick={() => setShowLeaderboard(true)}  className="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 ml-70">
+              LeaderBoard
+              </Button>
+              </div>
         </div>
       </div>
+      )}
+
+      {showLeaderboard && (
+        <div className="mt-6">
+          <Leaderboard exam={exam} onClose={() => setShowLeaderboard(false)} />
+        </div>
+      )}
       
       {/* Detailed Results */}
       {results.answers && (

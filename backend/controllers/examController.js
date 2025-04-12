@@ -69,7 +69,9 @@ const getExams = asyncHandler(async (req, res) => {
 const getExam = asyncHandler(async (req, res) => {
   const exam = await Exam.findById(req.params.id)
     .populate('createdBy', 'name')
-    .populate('questions');
+    .populate('questions')
+    .populate('submissions.student', 'name');
+
     // console.log(exam.questions)
 
   if (!exam) {
@@ -181,7 +183,7 @@ const deleteExam = asyncHandler(async (req, res) => {
 });
 const submitExam = asyncHandler(async (req, res) => {
   // console.log(req.body);
-  const { answers, timeTaken } = req.body;
+  const { answers, timeTaken, tabSwitches } = req.body;
   
   if (!answers) {
     res.status(400);
@@ -195,16 +197,16 @@ const submitExam = asyncHandler(async (req, res) => {
     res.status(404);
     throw new Error('Exam not found');
   }
-  // const alreadySubmitted = exam.submissions?.some(
-  //   submission => submission.student.toString() === req.user._id.toString()
-  // );
+  const alreadySubmitted = exam.submissions?.some(
+    submission => submission.student.toString() === req.user._id.toString()
+  );
 
   // console.log("after already submitted")
 
-  // if (alreadySubmitted) {
-  //   res.status(400);
-  //   throw new Error('You have already submitted this exam');
-  // }
+  if (alreadySubmitted) {
+    res.status(400);
+    throw new Error('You have already submitted this exam');
+  }
 
   const maxAllowedTime = exam.duration * 60 + 30;
   if (timeTaken > maxAllowedTime) {
@@ -271,7 +273,8 @@ const submitExam = asyncHandler(async (req, res) => {
     timeTaken,
     submittedAt: Date.now(),
     status: needsManualEvaluation ? 'pending' : (passed ? 'passed' : 'failed'),
-    needsManualEvaluation
+    needsManualEvaluation,
+    tabSwitches: tabSwitches || 0
   };
   // console.log("submission", submission)
   // console.log("exam",exam);

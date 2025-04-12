@@ -22,6 +22,8 @@ const TakeExam = () => {
   const [confirmSubmit, setConfirmSubmit] = useState(false);
   const timerRef = useRef(null);
   const startTimeRef = useRef(null);
+  const tabSwitchCountRef = useRef(0);
+
 
   // Load exam data
   useEffect(() => {
@@ -85,6 +87,7 @@ const TakeExam = () => {
     // Handle tab switching
     const handleVisibilityChange = () => {
       if (document.hidden) {
+        tabSwitchCountRef.current += 1;
         emitTabSwitch(id, user._id);
         toast.warning('Tab switching detected! This may be flagged for review.');
       }
@@ -154,7 +157,8 @@ const TakeExam = () => {
     try {
       const res = await examAPI.submitExam(id, {
         answers: formattedAnswers,
-        timeTaken
+        timeTaken,
+        tabSwitches: tabSwitchCountRef.current
       });
 
       console.log("hello in",res.data);
