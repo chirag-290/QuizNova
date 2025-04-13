@@ -35,7 +35,7 @@ exports.sendEmail = async (options) => {
 
       ${options.certificateUrl ? `
       <p>You can download your certificate from the following link:</p>
-      <p><a href="${options.certificateUrl}" target="_blank">🎓 Download Certificate</a></p>
+      <p><a href="https://examportal-1-f1qy.onrender.com${options.certificateUrl}" target="_blank">🎓 Download Certificate</a></p>
       ` : ""}
 
       <p>Keep up the great work and continue learning!</p>
