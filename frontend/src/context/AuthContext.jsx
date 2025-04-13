@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }) => {
           return;
         }
 
-        const res = await axios.get('http://localhost:5000/api/auth/me');
+        const res = await axios.get('https://examportal-i5j6.onrender.com/api/auth/me');
         
         if (res.data.success) {
           setUser(res.data.data);
@@ -73,7 +73,7 @@ export const AuthProvider = ({ children }) => {
     setError(null);
     
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/register', userData);
+      const res = await axios.post('https://examportal-i5j6.onrender.com/api/auth/register', userData);
       
       if (res.data.success) {
         localStorage.setItem('token', res.data.token);
@@ -98,7 +98,7 @@ export const AuthProvider = ({ children }) => {
     setError(null);
     
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/login', userData);
+      const res = await axios.post('https://examportal-i5j6.onrender.com/api/auth/login', userData);
       
       if (res.data.success) {
         localStorage.setItem('token', res.data.token);
@@ -120,7 +120,7 @@ export const AuthProvider = ({ children }) => {
   
   const logout = async () => {
     try {
-      await axios.get('http://localhost:5000/api/auth/logout');
+      await axios.get('https://examportal-i5j6.onrender.com/api/auth/logout');
     } catch (err) {
       console.error('Logout error:', err);
     } finally {
@@ -138,7 +138,7 @@ export const AuthProvider = ({ children }) => {
     setError(null);
     
     try {
-      const res = await axios.put(`http://localhost:5000/api/users/${user._id}`, userData);
+      const res = await axios.put(`https://examportal-i5j6.onrender.com/api/users/${user._id}`, userData);
       
       if (res.data.success) {
         setUser(res.data.data);

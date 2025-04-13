@@ -140,7 +140,7 @@ const ExamResults = () => {
               </div>
               
               <a 
-                href={`http://localhost:5000${results.certificateUrl}`} 
+                href={`https://examportal-i5j6.onrender.com${results.certificateUrl}`} 
                 target="_blank" 
                 download 
                 rel="noopener noreferrer"
