@@ -38,7 +38,7 @@ function App() {
   return (
     <AuthProvider>
       <Router>
-        <div className="flex flex-col min-h-screen bg-gray-50">
+        <div className="flex bg-gradient-to-br from-[#0d1117] to-[#1f2937] flex-col min-h-screen bg-gray-50">
           <Navbar />
           <main className="flex-grow container mx-auto px-4 py-8">
             <Routes>

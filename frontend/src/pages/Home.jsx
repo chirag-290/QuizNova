@@ -1,37 +1,31 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { BookOpen, Award, Clock, Shield, Users, CheckCircle } from 'lucide-react';
+import { Rocket, Brain, Globe, UserCheck, Settings, FileCheck } from 'lucide-react';
 import Button from '../components/ui/Button';
 
 const Home = () => {
   return (
-    <div className="space-y-20 font-sans">
+    <div className="font-sans bg-gradient-to-br from-[#0d1117] to-[#1f2937] text-white min-h-screen space-y-28">
+
       {/* Hero Section */}
-      <section className="relative py-16 md:py-24 bg-gradient-to-br from-indigo-700 via-purple-600 to-blue-500 rounded-3xl text-white overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10"></div>
-        <div className="container mx-auto px-6 text-center relative z-10 animate-fade-in">
-          <h1 className="text-5xl md:text-6xl font-extrabold mb-6 tracking-tight drop-shadow-lg">
-            Elevate Your Exam Experience
+      <section className="relative py-28 px-6 overflow-hidden bg-[#1f1f1f] rounded-b-[6rem] shadow-xl">
+        <div className="absolute -top-20 -left-20 w-96 h-96 bg-indigo-700 opacity-20 blur-3xl rounded-full animate-pulse"></div>
+        <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-pink-600 opacity-20 blur-3xl rounded-full animate-pulse"></div>
+        <div className="relative z-10 max-w-4xl mx-auto text-center">
+          <h1 className="text-6xl font-extrabold tracking-tight leading-tight mb-6 animate-fade-in">
+            Revolutionize Your Exams
           </h1>
-          <p className="text-xl md:text-2xl mb-10 max-w-3xl mx-auto leading-relaxed opacity-90">
-            A cutting-edge platform designed for seamless exam creation, management, and delivery.
+          <p className="text-xl text-gray-300 mb-10 animate-fade-in delay-200">
+            From creation to evaluation, manage exams with cutting-edge tools and intuitive controls.
           </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-6">
+          <div className="flex flex-col sm:flex-row justify-center gap-6 animate-fade-in delay-300">
             <Link to="/register">
-              <Button 
-                size="large" 
-                variant="secondary" 
-                className="bg-white text-indigo-700 font-bold hover:bg-indigo-100 transition-all duration-300 shadow-lg transform hover:-translate-y-1"
-              >
-                Start Now
+              <Button className="bg-pink-600 hover:bg-pink-500 transition shadow-md text-lg font-bold px-6 py-3 rounded-full">
+                Start Free
               </Button>
             </Link>
             <Link to="/login">
-              <Button 
-                size="large" 
-                variant="outline" 
-                className="bg-transparent border-2 border-white text-white hover:bg-white/20 transition-all duration-300 shadow-lg transform hover:-translate-y-1"
-              >
+              <Button className="bg-transparent border border-white hover:bg-white/10 transition text-lg px-6 py-3 rounded-full">
                 Sign In
               </Button>
             </Link>
@@ -40,111 +34,104 @@ const Home = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-16">
-        <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-16 text-gray-800 animate-fade-up">Why Choose Us?</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            {[
-              { icon: Shield, title: "Secure Testing", desc: "AI-powered proctoring with tab-switching detection and robust security protocols." },
-              { icon: Clock, title: "Live Monitoring", desc: "Real-time insights into student progress and exam analytics." },
-              { icon: CheckCircle, title: "Smart Grading", desc: "Automated scoring for efficiency, with manual review options." }
-            ].map((feature, index) => (
-              <div 
-                key={index}
-                className="group relative bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-indigo-50 to-purple-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
-                <div className="relative z-10">
-                  <div className="flex items-center justify-center w-16 h-16 bg-indigo-100 rounded-full mb-6 mx-auto group-hover:bg-indigo-200 transition-colors duration-300">
-                    <feature.icon className="h-8 w-8 text-indigo-600" />
-                  </div>
-                  <h3 className="text-xl font-semibold mb-3 text-gray-800 text-center">{feature.title}</h3>
-                  <p className="text-gray-600 text-center leading-relaxed">{feature.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+      <section className="px-6 py-24 bg-[#111827] rounded-t-[6rem]">
+        <div className="text-center mb-20">
+          <h2 className="text-4xl font-bold mb-4">Why Choose Us?</h2>
+          <p className="text-gray-400">Next-gen tools to elevate your assessment experience</p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-6xl mx-auto">
+          {[ 
+            { icon: Rocket, title: "Lightning Fast Setup", desc: "Deploy exams in minutes with smart templates and auto-import." },
+            { icon: Brain, title: "Intelligent Evaluation", desc: "AI-based grading with manual override and insights." },
+            { icon: Globe, title: "Global Access", desc: "Reach students across the globe with zero hassle and full reliability." },
+          ].map((feature, i) => (
+            <div 
+              key={i} 
+              className="bg-[#1f2937] p-8 rounded-3xl transform hover:-translate-y-2 transition duration-300 shadow-lg hover:shadow-xl"
+            >
+              <feature.icon className="h-12 w-12 mb-4 text-pink-500" />
+              <h3 className="text-2xl font-semibold mb-2">{feature.title}</h3>
+              <p className="text-gray-400">{feature.desc}</p>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* How It Works */}
-      <section className="py-16 bg-gradient-to-r from-gray-50 to-blue-50 rounded-3xl">
-        <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-16 text-gray-800 animate-fade-up">How It Works</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            {[
-              { step: 1, title: "Craft Exams", desc: "Design custom exams with diverse question types and precise settings." },
-              { step: 2, title: "Take Exams", desc: "Securely access and complete exams with an intuitive interface." },
-              { step: 3, title: "View Results", desc: "Instant feedback and downloadable certificates for achievements." }
-            ].map((step, index) => (
-              <div 
-                key={index} 
-                className="flex flex-col items-center text-center group animate-fade-up"
-                style={{ animationDelay: `${index * 150}ms` }}
-              >
-                <div className="w-14 h-14 bg-indigo-600 rounded-full flex items-center justify-center text-white font-bold text-2xl mb-6 shadow-md group-hover:bg-indigo-700 transition-colors duration-300">
-                  {step.step}
-                </div>
-                <h3 className="text-xl font-semibold mb-3 text-gray-800">{step.title}</h3>
-                <p className="text-gray-600 leading-relaxed max-w-xs">{step.desc}</p>
-              </div>
-            ))}
-          </div>
+      {/* Workflow Section */}
+      <section className="px-6 py-24 bg-gradient-to-br from-[#1a1a1a] to-[#0f172a]">
+        <div className="text-center mb-20">
+          <h2 className="text-4xl font-bold mb-4">Your Workflow, Simplified</h2>
+          <p className="text-gray-400">Three steps to seamless exams</p>
+        </div>
+        <div className="flex flex-col md:flex-row justify-center items-stretch gap-12 max-w-6xl mx-auto">
+          {[
+            { step: "01", title: "Design", desc: "Build custom exams with drag & drop UI and question banks." },
+            { step: "02", title: "Conduct", desc: "Deliver exams securely via any device, anywhere." },
+            { step: "03", title: "Evaluate", desc: "Analyze performance instantly with actionable insights." },
+          ].map((item, i) => (
+            <div 
+              key={i} 
+              className="bg-[#1e293b] rounded-[2rem] p-8 text-center transform hover:scale-105 transition duration-300"
+            >
+              <div className="text-4xl font-bold text-indigo-400 mb-4">{item.step}</div>
+              <h3 className="text-2xl mb-2 font-semibold">{item.title}</h3>
+              <p className="text-gray-400">{item.desc}</p>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* User Types */}
-      <section className="py-16">
-        <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-16 text-gray-800 animate-fade-up">Built for Everyone</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            {[
-              { icon: Users, title: "Students", items: ["Access exams anywhere", "Instant results", "Track progress", "Earn certificates"] },
-              { icon: BookOpen, title: "Examiners", items: ["Create custom exams", "Manage question banks", "Monitor in real-time", "Review answers"] },
-              { icon: Award, title: "Admins", items: ["Oversee users", "Manage exams", "View analytics", "Customize settings"] }
-            ].map((user, index) => (
-              <div 
-                key={index}
-                className="bg-white/80 backdrop-blur-lg p-8 rounded-2xl shadow-xl border border-gray-100 hover:border-indigo-200 transition-all duration-300 transform hover:-translate-y-2"
-              >
-                <div className="flex items-center mb-6">
-                  <user.icon className="h-10 w-10 text-indigo-600 mr-4" />
-                  <h3 className="text-2xl font-semibold text-gray-800">{user.title}</h3>
-                </div>
-                <ul className="space-y-4">
-                  {user.items.map((item, i) => (
-                    <li key={i} className="flex items-center text-gray-600">
-                      <span className="text-green-500 mr-3">✓</span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
+      {/* User Roles Section */}
+      <section className="px-6 py-24 bg-[#0f172a] rounded-b-[6rem]">
+        <div className="text-center mb-20">
+          <h2 className="text-4xl font-bold mb-4">Who Uses This Platform?</h2>
+          <p className="text-gray-400">From learners to leaders—everyone wins</p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-6xl mx-auto">
+          {[
+            { icon: UserCheck, title: "Students", points: ["Fast results", "Exam archives", "Progress reports"] },
+            { icon: FileCheck, title: "Instructors", points: ["Question banks", "Smart scoring", "Live monitoring"] },
+            { icon: Settings, title: "Admins", points: ["User management", "Reports & control", "Audit logs"] },
+          ].map((role, i) => (
+            <div 
+              key={i} 
+              className="bg-[#1f2937] p-8 rounded-3xl shadow-md hover:shadow-xl transition duration-300"
+            >
+              <role.icon className="h-10 w-10 mb-4 text-pink-400" />
+              <h3 className="text-xl font-semibold mb-4">{role.title}</h3>
+              <ul className="text-gray-300 space-y-2">
+                {role.points.map((pt, j) => (
+                  <li key={j} className="flex items-center">
+                    <span className="text-green-400 mr-2">✔</span>{pt}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-3xl text-white text-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10"></div>
-        <div className="container mx-auto px-6 relative z-10">
-          <h2 className="text-4xl font-bold mb-6 drop-shadow-lg animate-fade-up">Ready to Transform Your Exams?</h2>
-          <p className="text-xl mb-10 max-w-2xl mx-auto opacity-90 animate-fade-up" style={{ animationDelay: '150ms' }}>
-            Join a thriving community of learners and educators today.
+      {/* Final CTA Section */}
+      <section className="px-6 py-28 bg-[#111827] text-center">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-4xl font-bold mb-6 animate-fade-in">Ready to Transform Your Exam Experience?</h2>
+          <p className="text-gray-400 text-lg mb-10 animate-fade-in delay-200">
+            Discover a better way to test, learn, and grow.
           </p>
           <Link to="/register">
-            <Button 
-              size="large" 
-              variant="secondary" 
-              className="bg-white text-indigo-700 font-bold hover:bg-indigo-100 transition-all duration-300 shadow-lg transform hover:-translate-y-1 animate-fade-up"
-              style={{ animationDelay: '300ms' }}
-            >
-              Join Now
+            <Button className="bg-pink-600 hover:bg-pink-500 text-white px-8 py-4 rounded-full text-lg font-bold shadow-md animate-fade-in delay-300">
+              Get Started
             </Button>
           </Link>
+          <p className="mt-6 text-gray-500 text-sm animate-fade-in delay-500">
+            Already have an account?{' '}
+            <Link to="/login" className="text-pink-300 hover:underline">
+              Sign in here
+            </Link>
+          </p>
         </div>
       </section>
+
     </div>
   );
 };

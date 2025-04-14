@@ -20,14 +20,12 @@ const EvaluateSubmission = () => {
     const fetchSubmissionData = async () => {
       setLoading(true);
       try {
-        // This would be a specific API call to get submission details
-        // For now, we'll simulate it by getting exam details and finding the submission
+       
         const examRes = await examAPI.getExam(examId);
         if (examRes.data.success) {
           setExam(examRes.data.data);
           
-          // Simulate getting submission data
-          // In a real app, this would be a separate API call
+          
           const mockSubmission = {
             _id: submissionId,
             student: {
@@ -43,12 +41,12 @@ const EvaluateSubmission = () => {
               needsEvaluation: q.type === 'Subjective'
             })),
             submittedAt: new Date().toISOString(),
-            timeTaken: 1800, // 30 minutes in seconds
+            timeTaken: 1800,
             currentScore: 0,
             totalPoints: examRes.data.data.questions.reduce((sum, q) => sum + q.marks, 0)
           };
           
-          // Calculate current score from MCQ questions
+        
           mockSubmission.currentScore = mockSubmission.answers.reduce((sum, a) => 
             sum + (a.points || 0), 0);
           
