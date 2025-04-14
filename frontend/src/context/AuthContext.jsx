@@ -1,27 +1,26 @@
-import React, { createContext, useState, useEffect } from 'react';
-import axios from 'axios';
-import { toast } from 'react-toastify';
-import { jwtDecode } from 'jwt-decode';
+import React, { createContext, useState, useEffect } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { jwtDecode } from "jwt-decode";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [token, setToken] = useState(localStorage.getItem('token'));
+  const [token, setToken] = useState(localStorage.getItem("token"));
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
- 
   useEffect(() => {
     if (token) {
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     } else {
-      delete axios.defaults.headers.common['Authorization'];
+      delete axios.defaults.headers.common["Authorization"];
     }
   }, [token]);
 
-   useEffect(() => {
+  useEffect(() => {
     const loadUser = async () => {
       if (!token) {
         setLoading(false);
@@ -29,13 +28,11 @@ export const AuthProvider = ({ children }) => {
       }
 
       try {
-         
         const decoded = jwtDecode(token);
         const currentTime = Date.now() / 1000;
-        
+
         if (decoded.exp < currentTime) {
-      
-          localStorage.removeItem('token');
+          localStorage.removeItem("token");
           setToken(null);
           setIsAuthenticated(false);
           setUser(null);
@@ -43,111 +40,119 @@ export const AuthProvider = ({ children }) => {
           return;
         }
 
-        const res = await axios.get('https://examportal-i5j6.onrender.com/api/auth/me');
-        
+        const res = await axios.get(
+          "https://quiznova.onrender.com/api/auth/me"
+        );
+
         if (res.data.success) {
           setUser(res.data.data);
           setIsAuthenticated(true);
         } else {
           setUser(null);
           setIsAuthenticated(false);
-          localStorage.removeItem('token');
+          localStorage.removeItem("token");
           setToken(null);
         }
       } catch (err) {
-        console.error('Error loading user:', err);
+        console.error("Error loading user:", err);
         setUser(null);
         setIsAuthenticated(false);
-        localStorage.removeItem('token');
+        localStorage.removeItem("token");
         setToken(null);
       }
-      
+
       setLoading(false);
     };
 
     loadUser();
   }, [token]);
- 
+
   const register = async (userData) => {
     setLoading(true);
     setError(null);
-    
+
     try {
-      const res = await axios.post('https://examportal-i5j6.onrender.com/api/auth/register', userData);
-      
+      const res = await axios.post(
+        "https://quiznova.onrender.com/api/auth/register",
+        userData
+      );
+
       if (res.data.success) {
-        localStorage.setItem('token', res.data.token);
+        localStorage.setItem("token", res.data.token);
         setToken(res.data.token);
         setUser(res.data.user);
         setIsAuthenticated(true);
-        toast.success('Registration successful!');
+        toast.success("Registration successful!");
         return true;
       }
     } catch (err) {
-      setError(err.response?.data?.error || 'Registration failed');
-      toast.error(err.response?.data?.error || 'Registration failed');
+      setError(err.response?.data?.error || "Registration failed");
+      toast.error(err.response?.data?.error || "Registration failed");
       return false;
     } finally {
       setLoading(false);
     }
   };
 
- 
   const login = async (userData) => {
     setLoading(true);
     setError(null);
-    
+
     try {
-      const res = await axios.post('https://examportal-i5j6.onrender.com/api/auth/login', userData);
-      
+      const res = await axios.post(
+        "https://quiznova.onrender.com/api/auth/login",
+        userData
+      );
+
       if (res.data.success) {
-        localStorage.setItem('token', res.data.token);
+        localStorage.setItem("token", res.data.token);
         setToken(res.data.token);
         setUser(res.data.user);
         setIsAuthenticated(true);
-        toast.success('Login successful!');
+        toast.success("Login successful!");
         return true;
       }
     } catch (err) {
-      setError(err.response?.data?.error || 'Login failed');
-      toast.error(err.response?.data?.error || 'Login failed');
+      setError(err.response?.data?.error || "Login failed");
+      toast.error(err.response?.data?.error || "Login failed");
       return false;
     } finally {
       setLoading(false);
     }
   };
 
-  
   const logout = async () => {
     try {
-      await axios.get('https://examportal-i5j6.onrender.com/api/auth/logout');
+      await axios.get("https://quiznova.onrender.com/api/auth/logout");
     } catch (err) {
-      console.error('Logout error:', err);
+      console.error("Logout error:", err);
     } finally {
-      localStorage.removeItem('token');
+      localStorage.removeItem("token");
       setToken(null);
       setUser(null);
       setIsAuthenticated(false);
-      toast.info('Logged out successfully');
+      toast.info("Logged out successfully");
     }
   };
 
-  
   const updateProfile = async (userData) => {
     setLoading(true);
     setError(null);
-    
+
     try {
-      const res = await axios.put(`https://examportal-i5j6.onrender.com/api/users/${user._id}`, userData);
-      
+      const res = await axios.put(
+        `https://quiznova.onrender.com/api/users/${user._id}`,
+        userData
+      );
+
       if (res.data.success) {
         setUser(res.data.data);
-        toast.success('Profile updated successfully!');
+        toast.success("Profile updated successfully!");
         return true;
       }
     } catch (err) {
-      setError(err.response?.data?.error || 'Profile update failed');
-      toast.error(err.response?.data?.error || 'Profile update failed');
+      setError(err.response?.data?.error || "Profile update failed");
+      toast.error(err.response?.data?.error || "Profile update failed");
       return false;
     } finally {
       setLoading(false);
@@ -165,7 +170,7 @@ export const AuthProvider = ({ children }) => {
         register,
         login,
         logout,
-        updateProfile
+        updateProfile,
       }}
     >
       {children}

@@ -1,4 +1,4 @@
-const nodemailer = require('nodemailer');
+const nodemailer = require("nodemailer");
 
 /**
  * Send email using nodemailer
@@ -9,17 +9,16 @@ const nodemailer = require('nodemailer');
  * @param {String} options.html - Email HTML content (optional)
  */
 exports.sendEmail = async (options) => {
-  console.log('Sending email with options:', options.email);  
-   
+  console.log("Sending email with options:", options.email);
+
   const transporter = nodemailer.createTransport({
     service: process.env.EMAIL_SERVICE,
     auth: {
       user: process.env.EMAIL_USERNAME,
-      pass: process.env.EMAIL_PASSWORD
-    }
+      pass: process.env.EMAIL_PASSWORD,
+    },
   });
 
- 
   const mailOptions = {
     from: `'Quicknova' <${process.env.EMAIL_FROM}>`,
     to: options.email,
@@ -30,13 +29,19 @@ exports.sendEmail = async (options) => {
       <ul>
         <li><strong>Exam Title:</strong> ${options.title}</li>
         <li><strong>Score:</strong> ${options.score}%</li>
-        <li><strong>Status:</strong> ${options.passed ? "Passed" : "Failed"}</li>
+        <li><strong>Status:</strong> ${
+          options.passed ? "Passed" : "Failed"
+        }</li>
       </ul>
 
-      ${options.certificateUrl ? `
+      ${
+        options.certificateUrl
+          ? `
       <p>You can download your certificate from the following link:</p>
-      <p><a href="https://examportal-i5j6.onrender.com${options.certificateUrl}" target="_blank">🎓 Download Certificate</a></p>
-      ` : ""}
+      <p><a href="https://quiznova.onrender.com${options.certificateUrl}" target="_blank">🎓 Download Certificate</a></p>
+      `
+          : ""
+      }
 
       <p>Keep up the great work and continue learning!</p>
       <p>Best wishes,</p>
@@ -61,7 +66,9 @@ exports.sendExamReminder = async (email, name, exam) => {
   const message = `
     Dear ${name},
 
-    This is a friendly reminder that your exam "${exam.title}" is scheduled to start in 24 hours.
+    This is a friendly reminder that your exam "${
+      exam.title
+    }" is scheduled to start in 24 hours.
 
     Exam Details:
     - Title: ${exam.title}
@@ -81,6 +88,6 @@ exports.sendExamReminder = async (email, name, exam) => {
   await this.sendEmail({
     email,
     subject,
-    message
+    message,
   });
 };

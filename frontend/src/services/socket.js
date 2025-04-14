@@ -1,24 +1,24 @@
-import { io } from 'socket.io-client';
+import { io } from "socket.io-client";
 
 let socket;
 
 export const initSocket = () => {
   if (!socket) {
-    socket = io('https://examportal-i5j6.onrender.com', {
-      transports: ['websocket'],
-      autoConnect: false
+    socket = io("https://quiznova.onrender.com", {
+      transports: ["websocket"],
+      autoConnect: false,
     });
 
-    socket.on('connect', () => {
-      console.log('Socket connected');
+    socket.on("connect", () => {
+      console.log("Socket connected");
     });
 
-    socket.on('disconnect', () => {
-      console.log('Socket disconnected');
+    socket.on("disconnect", () => {
+      console.log("Socket disconnected");
     });
 
-    socket.on('connect_error', (error) => {
-      console.error('Socket connection error:', error);
+    socket.on("connect_error", (error) => {
+      console.error("Socket connection error:", error);
     });
   }
 
@@ -30,10 +30,8 @@ export const connectSocket = (token) => {
     initSocket();
   }
 
- 
   socket.auth = { token };
-  
-  
+
   if (!socket.connected) {
     socket.connect();
   }
@@ -49,37 +47,37 @@ export const disconnectSocket = () => {
 
 export const joinExamRoom = (examId) => {
   if (socket && socket.connected) {
-    socket.emit('join_exam', examId);
+    socket.emit("join_exam", examId);
   }
 };
 
 export const listenForTimerUpdates = (callback) => {
   if (socket) {
-    socket.on('timer_update', callback);
+    socket.on("timer_update", callback);
   }
 };
 
 export const emitTabSwitch = (examId, userId) => {
   if (socket && socket.connected) {
-    socket.emit('tab_switch', { examId, userId });
+    socket.emit("tab_switch", { examId, userId });
   }
 };
 
 export const listenForTabSwitches = (callback) => {
   if (socket) {
-    socket.on('student_tab_switch', callback);
+    socket.on("student_tab_switch", callback);
   }
 };
 
 export const removeTimerListener = () => {
   if (socket) {
-    socket.off('timer_update');
+    socket.off("timer_update");
   }
 };
 
 export const removeTabSwitchListener = () => {
   if (socket) {
-    socket.off('student_tab_switch');
+    socket.off("student_tab_switch");
   }
 };
 
@@ -92,5 +90,5 @@ export default {
   emitTabSwitch,
   listenForTabSwitches,
   removeTimerListener,
-  removeTabSwitchListener
+  removeTabSwitchListener,
 };
