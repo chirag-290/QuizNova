@@ -50,7 +50,7 @@ const Register = () => {
       {/* Logo */}
       <div className="flex items-center gap-2 mb-8 animate-fade-in">
         <Award className="h-8 w-8 text-pink-500" />
-        <span className="text-2xl font-bold text-white">ExamFlow</span>
+        <span className="text-2xl font-bold text-white">QuizNova</span>
       </div>
       
       <div className="w-full max-w-md relative">
