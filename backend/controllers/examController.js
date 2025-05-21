@@ -476,6 +476,6 @@ module.exports = {
   updateExam,
   deleteExam,
   submitExam,
-  getPendingEvaluations,
-  evaluateSubjective
+  // getPendingEvaluations,
+  // evaluateSubjective
 };

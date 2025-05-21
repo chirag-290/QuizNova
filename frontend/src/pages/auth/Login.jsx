@@ -43,18 +43,18 @@ const Login = () => {
 
   return (
     <div className="font-sans bg-gradient-to-br from-[#0d1117] to-[#1f2937] min-h-screen flex flex-col justify-center items-center px-6 py-12">
-      {/* Logo */}
+   
       <div className="flex items-center gap-2 mb-12 animate-fade-in">
         <Award className="h-10 w-10 text-pink-500" />
         <span className="text-3xl font-bold text-white">QuizNova</span>
       </div>
       
       <div className="w-full max-w-md relative animate-fade-in">
-        {/* Background Effects - Matching dashboard's style */}
+      
         <div className="absolute -top-20 -left-20 w-96 h-96 bg-indigo-700 opacity-20 blur-3xl rounded-full animate-pulse"></div>
         <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-pink-600 opacity-20 blur-3xl rounded-full animate-pulse"></div>
         
-        {/* Login Card - Matching dashboard card styling */}
+    
         <Card
           className="w-full relative z-10 bg-[#1f2937] backdrop-blur-md shadow-2xl rounded-3xl overflow-hidden border border-gray-700/50"
         >
@@ -64,7 +64,7 @@ const Login = () => {
           </div>
           
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 p-8">
-            {/* Email Field */}
+           
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
                 Email Address
@@ -89,7 +89,7 @@ const Login = () => {
               )}
             </div>
 
-            {/* Password Field */}
+         
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-2">
                 Password
@@ -111,14 +111,14 @@ const Login = () => {
               )}
             </div>
 
-            {/* Forgot Password */}
+            
             <div className="flex justify-end">
               <Link to="/forgot-password" className="text-sm text-gray-400 hover:text-pink-400 transition-colors">
                 Forgot your password?
               </Link>
             </div>
 
-            {/* Submit Button - Using dashboard gradient style */}
+            
             <Button
               type="submit"
               fullWidth
@@ -138,7 +138,7 @@ const Login = () => {
             </Button>
           </form>
 
-          {/* Register Link */}
+      
           <div className="mt-4 text-center pb-8">
             <p className="text-sm text-gray-400">
               Don't have an account?{' '}
@@ -153,7 +153,7 @@ const Login = () => {
         </Card>
       </div>
       
-      {/* Social Sign-in Options - Styled similar to dashboard cards */}
+    
       <div className="mt-10 w-full max-w-md animate-fade-in" style={{ animationDelay: "200ms" }}>
         <div className="flex items-center justify-center mb-4">
           <div className="flex-grow h-px bg-gray-700/50"></div>
@@ -174,7 +174,7 @@ const Login = () => {
         </div>
       </div>
       
-      {/* Footer */}
+    
       <div className="mt-12 text-center text-sm text-gray-500 animate-fade-in" style={{ animationDelay: "500ms" }}>
         <p>© 2025 QuizNova. All rights reserved.</p>
       </div>
@@ -182,7 +182,7 @@ const Login = () => {
   );
 };
 
-// Add custom animation styles
+
 const styleElement = document.createElement('style');
 styleElement.textContent = `
   @keyframes fade-in {

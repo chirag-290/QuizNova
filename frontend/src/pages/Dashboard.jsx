@@ -86,7 +86,7 @@ const Dashboard = () => {
 
   return (
     <div className="font-sans bg-gradient-to-br from-[#0d1117] to-[#1f2937] text-white min-h-screen pb-12 animate-fade-in">
-      {/* Header Section */}
+  
       <section className="relative py-16 px-6 overflow-hidden bg-[#1f1f1f] rounded-b-[3rem] shadow-xl mb-12">
         <div className="absolute -top-20 -left-20 w-96 h-96 bg-indigo-700 opacity-20 blur-3xl rounded-full animate-pulse"></div>
         <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-pink-600 opacity-20 blur-3xl rounded-full animate-pulse"></div>
@@ -105,7 +105,6 @@ const Dashboard = () => {
         </div>
       </section>
 
-      {/* Stats Cards */}
       <section className="px-6 max-w-6xl mx-auto mb-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {[
@@ -180,9 +179,9 @@ const Dashboard = () => {
         </div>
       </section>
 
-      {/* Main Content */}
+      
       <div className="px-6 max-w-6xl mx-auto space-y-16">
-        {/* Exams Section */}
+        
         <section className="bg-[#1f2937] rounded-3xl p-8 shadow-xl">
           <div className="flex justify-between items-center mb-8">
             <h2 className="text-2xl font-bold text-white">
@@ -253,7 +252,6 @@ const Dashboard = () => {
           )}
         </section>
 
-        {/* Student History Section */}
         {user.role === "Student" && (
           <section className="bg-[#1f2937] rounded-3xl p-8 shadow-xl">
             <div className="flex justify-between items-center mb-8">
@@ -357,7 +355,7 @@ const Dashboard = () => {
           </section>
         )}
 
-        {/* Pending Evaluations Section */}
+        
         {(user.role === "Examiner" || user.role === "Admin") && (
           <section className="bg-[#1f2937] rounded-3xl p-8 shadow-xl">
             <div className="flex justify-between items-center mb-8">
@@ -442,7 +440,7 @@ const Dashboard = () => {
           </section>
         )}
 
-        {/* Features Section */}
+        
         <section className="bg-[#1f2937] rounded-3xl p-8 shadow-xl">
           <h2 className="text-2xl font-bold text-white mb-8">Quick Actions</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

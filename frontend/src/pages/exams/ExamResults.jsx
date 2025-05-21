@@ -96,7 +96,7 @@ const ExamResults = () => {
 
           <div className="flex items-center gap-2">
             <Award className="h-6 w-6 text-pink-500" />
-            <span className="text-xl font-bold text-white">ExamFlow</span>
+            <span className="text-xl font-bold text-white">QuizNova</span>
           </div>
         </div>
 
@@ -320,7 +320,7 @@ const ExamResults = () => {
 
         {/* Footer */}
         <div className="mt-12 text-center text-sm text-gray-500 animate-fade-in delay-500">
-          <p>© 2025 ExamFlow. All rights reserved.</p>
+          <p>© 2025 QuizNova. All rights reserved.</p>
         </div>
       </div>
     </div>

@@ -40,9 +40,7 @@ const getQuestions = asyncHandler(async (req, res) => {
   });
 });
 
-// @desc    Get single question by ID
-// @route   GET /api/questions/:id
-// @access  Private
+
 const getQuestion = asyncHandler(async (req, res) => {
   const question = await Question.findById(req.params.id);
 

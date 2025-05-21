@@ -29,12 +29,12 @@ router
   .route('/:id/submit')
   .post(protect, authorize('Student'), submitExam);
 
-router
-  .route('/evaluations')
-  .get(protect, authorize('Admin', 'Examiner'), getPendingEvaluations);
+// router
+//   .route('/evaluations')
+//   .get(protect, authorize('Admin', 'Examiner'), getPendingEvaluations);
 
-router
-  .route('/:examId/evaluate')
-  .post(protect, authorize('Admin', 'Examiner'), evaluateSubjective);
+// router
+//   .route('/:examId/evaluate')
+//   .post(protect, authorize('Admin', 'Examiner'), evaluateSubjective);
 
 module.exports = router;

@@ -138,7 +138,7 @@ const ExamDetails = () => {
             )}
           </div>
 
-          {/* Exam Header */}
+        
           <div className="relative overflow-hidden bg-[#1f2937] rounded-3xl shadow-xl">
             <div className="absolute -top-20 -left-20 w-96 h-96 bg-indigo-700 opacity-20 blur-3xl rounded-full"></div>
             <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-pink-600 opacity-20 blur-3xl rounded-full"></div>

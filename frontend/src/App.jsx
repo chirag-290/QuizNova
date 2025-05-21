@@ -30,8 +30,8 @@ import EditQuestion from './pages/questions/EditQuestion';
 // import UserManagement from './pages/admin/UserManagement';
 import PendingEvaluations from './pages/exams/PendingEvaluations';
 import EvaluateSubmission from './pages/exams/EvaluateSubmission';
-// import UserProfile from './pages/user/UserProfile';
-// import ExamHistory from './pages/user/ExamHistory';
+import UserProfile from './pages/user/UserProfile';
+import ExamHistory from './pages/user/ExamHistory';
 import NotFound from './pages/NotFound';
 
 function App() {
@@ -42,20 +42,18 @@ function App() {
           <Navbar />
           <main className="flex-grow container mx-auto px-4 py-8">
             <Routes>
-              {/* Public Routes */}
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               
-              {/* Private Routes (All authenticated users) */}
               <Route element={<PrivateRoute />}>
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/exams" element={<ExamList />} />
                 <Route path="/exams/:id" element={<ExamDetails />} />
                 <Route path="/exams/:id/take" element={<TakeExam />} />
                 <Route path="/exams/:id/results" element={<ExamResults />} />
-                {/* <Route path="/profile" element={<UserProfile />} /> */}
-                {/* <Route path="/exam-history" element={<ExamHistory />} /> */}
+                <Route path="/profile" element={<UserProfile />} />
+                <Route path="/exam-history" element={<ExamHistory />} />
               </Route>
               
               {/* Admin Routes */}
