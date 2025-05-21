@@ -154,7 +154,7 @@ const ExamHistory = () => {
 
                       {entry.certificateGenerated && entry.certificateUrl && (
                         <a
-                          href={`http://localhost:5000${entry.certificateUrl}`}
+                          href={`https://quiznova.onrender.com${entry.certificateUrl}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="flex items-center text-indigo-400 hover:text-indigo-300 transition"

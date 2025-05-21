@@ -14,7 +14,7 @@ const UserProfile = () => {
       try {
         setIsLoading(true);
         const token = localStorage.getItem("token");
-        const res = await axios.get("https://quiznova.onrender.com//users/exams", {
+        const res = await axios.get("https://quiznova.onrender.com/api/users/exams", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -233,7 +233,7 @@ const UserProfile = () => {
                         {entry.timeTaken} mins
                       </span>
                       {entry.certificateGenerated && (
-                        <Link to={entry.certificateUrl} className="text-xs text-indigo-400 hover:text-indigo-300">
+                        <Link to={`https://quiznova.onrender.com${entry.certificateUrl}`} className="text-xs text-indigo-400 hover:text-indigo-300">
                           View Certificate
                         </Link>
                       )}
